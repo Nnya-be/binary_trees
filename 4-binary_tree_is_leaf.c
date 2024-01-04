@@ -2,7 +2,7 @@
 /**
  *binary_tree_is_leaf - Check if a node is a leaf node.
  *@node: The node is the node to look.
- *@Return: 0 if not leaf else 1.
+ *Return: 0 if not leaf else 1.
  */
 int binary_tree_is_leaf(const binary_tree_t *node)
 {
