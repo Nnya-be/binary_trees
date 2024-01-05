@@ -1,72 +1,61 @@
 #include "binary_trees.h"
+#define Max(a, b) (a > b ? a + 1 : b + 1)
 
 /**
- * enqueue - Enqueues a binary tree node in the queue
- * @front: Double pointer to the front of the queue
- * @node: Pointer to the binary tree node to enqueue
+ * binary_tree_height - compute the height of BT recursively
+ * @tree: pointer to the root of ze tree
+ *
+ * Return: size of the tree
  */
-void enqueue(queue_node_t **front, const binary_tree_t *node)
-{
-queue_node_t *new_node = malloc(sizeof(queue_node_t));
-if (new_node == NULL)
-exit(EXIT_FAILURE);
-new_node->node = node;
-new_node->next = NULL;
 
-if (*front == NULL)
-*front = new_node;
-else
+size_t binary_tree_height(const binary_tree_t *tree)
 {
-queue_node_t *temp = *front;
-while (temp->next != NULL)
-{
-temp = temp->next;
-}
-temp->next = new_node;
-}
+	size_t l = 0;
+	size_t r = 0;
+
+	if (tree == NULL)
+		return (0);
+	l = binary_tree_height(tree->left);
+	r = binary_tree_height(tree->right);
+	if (tree->right == NULL && tree->left == NULL)
+		return (0);
+	return (Max(l, r));
 }
 
 /**
- * dequeue - Dequeues a binary tree node from the queue
- * @front: Double pointer to the front of the queue
- * Return: Pointer to the dequeued binary tree node
+ * check_level - check level o
+ * @tree: pointer to the root of the tree
+ * @l: level of the tree
+ * @func: print function
+ * Return: void
  */
-const binary_tree_t *dequeue(queue_node_t **front)
+void check_level(const binary_tree_t *tree, size_t l, void (*func)(int))
 {
-if (*front == NULL)
-return (NULL);
-
-const binary_tree_t *node = (*front)->node;
-queue_node_t *temp = *front;
-*front = (*front)->next;
-free(temp);
-
-return (node);
+	if (tree == NULL)
+		return;
+	if (l == 1)
+		func(tree->n);
+	else if (l > 1)
+	{
+		check_level(tree->left, l - 1, func);
+		check_level(tree->right, l - 1, func);
+	}
 }
 
 /**
- * binary_tree_levelorder - Performs level-order traversal on a binary tree
- * @tree: Pointer to the root node of the tree to traverse
- * @func: Pointer to a function to call for each node
+ * binary_tree_levelorder - level-order traversal
+ * @tree: pointer to ze root
+ * @func: pointer to function to print
+ *
+ * Return: void
  */
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
-if (tree == NULL || func == NULL)
-return;
+	size_t height, i;
 
-queue_node_t *front = NULL;
-
-enqueue(&front, tree);
-
-while (front != NULL)
-{
-const binary_tree_t *current = dequeue(&front);
-func(current->n);
-
-if (current->left != NULL)
-enqueue(&front, current->left);
-
-if (current->right != NULL)
-enqueue(&front, current->right);
-}
+	if (tree == NULL || func == NULL)
+		return;
+	height = binary_tree_height(tree);
+	for (i = 1; i <= height + 1; i++)
+		check_level(tree, i, func);
 }
