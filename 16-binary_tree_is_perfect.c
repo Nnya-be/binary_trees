@@ -1,5 +1,4 @@
 #include "binary_trees.h"
-#include <math.h>
 /**
  * binary_tree_height - Measures the height of a binary tree
  * @tree: Pointer to the root node of the tree to measure the height
@@ -8,18 +7,13 @@
  */
 size_t binary_tree_height(const binary_tree_t *tree)
 {
-    size_t left_height, right_height;
+	size_t left_height, right_height;
 
-    /* Check if tree is NULL */
-    if (tree == NULL)
-        return 0;
-
-    /* Recursively calculate the height of the left and right subtrees */
-    left_height = binary_tree_height(tree->left);
-    right_height = binary_tree_height(tree->right);
-
-    /* Return the maximum height of the left and right subtrees, plus 1 for the current level */
-    return (left_height > right_height ? left_height : right_height) + 1;
+	if (tree == NULL)
+		return (0);
+	left_height = binary_tree_height(tree->left);
+	right_height = binary_tree_height(tree->right);
+	return ((left_height > right_height ? left_height : right_height) + 1);
 }
 
 /**
@@ -30,12 +24,9 @@ size_t binary_tree_height(const binary_tree_t *tree)
  */
 size_t binary_tree_size(const binary_tree_t *tree)
 {
-    /* Check if tree is NULL */
-    if (tree == NULL)
-        return 0;
-
-    /* Recursively calculate the size of the left and right subtrees */
-    return 1 + binary_tree_size(tree->left) + binary_tree_size(tree->right);
+	if (tree == NULL)
+		return (0);
+	return (1 + binary_tree_size(tree->left) + binary_tree_size(tree->right));
 }
 
 /**
@@ -46,21 +37,12 @@ size_t binary_tree_size(const binary_tree_t *tree)
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-    size_t height, size, perfect_size;
+	size_t height, size, perfect_size;
 
-    /* Check if tree is NULL */
-    if (tree == NULL)
-        return 0;
-
-    /* Calculate the height of the tree */
-    height = binary_tree_height(tree);
-
-    /* Calculate the size of the tree */
-    size = binary_tree_size(tree);
-
-    /* Calculate the perfect size of a perfect binary tree with the same height */
-    perfect_size = pow(2, height) - 1;
-
-    /* Check if the tree's size is equal to the perfect size */
-    return size == perfect_size;
+	if (tree == NULL)
+		return (0);
+	height = binary_tree_height(tree);
+	size = binary_tree_size(tree);
+	perfect_size = pow(2, height) - 1;
+	return (size == perfect_size);
 }
