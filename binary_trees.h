@@ -26,7 +26,7 @@ typedef struct binary_tree_s
 void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
- binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
+binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
 void binary_tree_delete(binary_tree_t *tree);
 int binary_tree_is_leaf(const binary_tree_t *node);
 int binary_tree_is_root(const binary_tree_t *node);
@@ -46,5 +46,8 @@ double power(double base, int expo);
 size_t binary_tree_size(const binary_tree_t *tree);
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 binary_tree_t *binary_tree_uncle(binary_tree_t *node);
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second);
+binary_tree_t *find_common_ancestor(const binary_tree_t *node_1, const binary_tree_t *node_2);
+int is_ancestor(const binary_tree_t *node1, const binary_tree_t *node2);
 
 #endif /* _BINARY_TREES_H_ */
