@@ -29,7 +29,12 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	perfect_size = power(2.0, height) - 1;
 	return (size == perfect_size);
 }
-
+/**
+ *power - Calculates the exponential.
+ *@base: The base.
+ *@expo: The exponent.
+ *Return: The calculated value.
+ */
 double power(double base, int expo)
 {
 	double result = 1.0;
